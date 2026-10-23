@@ -43,11 +43,11 @@ jobs:
             echo "Building frontend..."
             npm run build
 
-            echo "Starting/reloading frontend on port 3020..."
+            echo "Starting frontend on port 3233..."
+            # Delete and re-create so a port change takes effect (restart keeps the old args)
             if pm2 describe ligergym-frontend > /dev/null 2>&1; then
-              PORT=3020 pm2 restart ligergym-frontend --update-env
-            else
-              PORT=3020 pm2 start npm --name "ligergym-frontend" -- start -- -p 3020
+              pm2 delete ligergym-frontend
             fi
+            PORT=3233 pm2 start npm --name "ligergym-frontend" -- start -- -p 3233
 
             pm2 save
