@@ -6,6 +6,7 @@ import { SmoothScroll } from "../components/SmoothScroll";
 import { SiteFooter } from "../components/SiteFooter";
 import { PageHero } from "../components/PageHero";
 import { FaqList } from "../components/FaqList";
+import { ScrollReveal } from "../components/ScrollReveal";
 import { faqContent, type FaqCategory } from "@/lib/faq-content";
 import { PHONE_DISPLAY, PHONE_E164, SITE_NAME, SOCIAL_LINKS } from "@/lib/site";
 
@@ -48,7 +49,7 @@ export default function FAQPage() {
                   key={c.id}
                   type="button"
                   onClick={() => setActive(c.id)}
-                  className={`mono shrink-0 rounded-[0.6rem] px-3.5 py-2 transition-colors ${
+                  className={`mono shrink-0 rounded-full px-3.5 py-2 transition-colors ${
                     active === c.id ? "bg-night text-white" : "bg-cloud text-night/65 hover:text-night"
                   }`}
                 >
@@ -56,13 +57,15 @@ export default function FAQPage() {
                 </button>
               ))}
             </div>
-            <FaqList items={items} />
+            <div key={active} className="animate-fade-in">
+              <FaqList items={items} />
+            </div>
           </div>
 
           <aside className="lg:col-span-4">
-            <div className="rounded-[1.25rem] bg-night p-7 text-white lg:sticky lg:top-28">
+            <ScrollReveal delay={150} className="rounded-[1.25rem] bg-night p-7 text-white lg:sticky lg:top-28">
               <p className="mono text-lime">Still have a question?</p>
-              <p className="mt-6 text-2xl leading-snug font-light tracking-tight">
+              <p className="mt-6 text-2xl leading-snug font-semibold tracking-tight">
                 Our front desk is happy to help. Just call or drop by.
               </p>
               <div className="mt-8 grid gap-2">
@@ -81,7 +84,7 @@ export default function FAQPage() {
                   </a>
                 ))}
               </div>
-            </div>
+            </ScrollReveal>
           </aside>
         </section>
       </main>

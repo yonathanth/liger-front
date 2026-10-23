@@ -6,22 +6,38 @@ import type { Metadata } from "next";
 import { SITE_BASE_URL, SITE_NAME } from "@/lib/site";
 
 export const SHARE_IMAGE = {
-  url: "/og-image.png",
+  url: `${SITE_BASE_URL}/og-image.png`,
+  secureUrl: `${SITE_BASE_URL}/og-image.png`,
   type: "image/png",
   width: 1200,
   height: 630,
-  alt: `${SITE_NAME}, community-focused gym in Haile Garment, Addis Ababa`,
+  alt: `${SITE_NAME}, community gym in Haile Garment, Addis Ababa`,
 };
 
 export function shareMeta({
   title,
   description,
   path = "",
+  imageUrl,
+  imageAlt,
 }: {
   title: string;
   description: string;
   path?: string;
+  imageUrl?: string;
+  imageAlt?: string;
 }): Pick<Metadata, "openGraph" | "twitter"> {
+  const image = imageUrl
+    ? {
+        url: imageUrl.startsWith("http") ? imageUrl : `${SITE_BASE_URL}${imageUrl}`,
+        secureUrl: imageUrl.startsWith("http") ? imageUrl : `${SITE_BASE_URL}${imageUrl}`,
+        type: "image/png",
+        width: 1200,
+        height: 630,
+        alt: imageAlt || title,
+      }
+    : SHARE_IMAGE;
+
   return {
     openGraph: {
       type: "website",
@@ -30,13 +46,13 @@ export function shareMeta({
       url: `${SITE_BASE_URL}${path}`,
       title,
       description,
-      images: [SHARE_IMAGE],
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [SHARE_IMAGE.url],
+      images: [image.url],
     },
   };
 }

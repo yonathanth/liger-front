@@ -29,7 +29,7 @@ export function SiteFooter() {
           <div className="md:col-span-5">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logo.png" alt={SITE_NAME} width={140} height={81} className="h-20 w-auto object-contain" />
-            <p className="mono mt-4 max-w-xs text-white/45">{SITE_TAGLINE}</p>
+            <p className="mono mt-4 max-w-xs text-white/60">{SITE_TAGLINE}</p>
           </div>
 
           <div className="md:col-span-2">
@@ -80,12 +80,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mono mt-20 flex flex-col gap-3 border-t border-white/10 pt-6 text-white/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mono mt-20 flex flex-col gap-3 border-t border-white/10 pt-6 text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {SITE_NAME}
           </p>
           <Link href="/admin/login" className="hover:text-white">
-            Staff login ■
+            Staff login ↗
           </Link>
         </div>
       </div>

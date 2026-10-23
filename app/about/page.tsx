@@ -1,4 +1,6 @@
+import { PublicIcon } from "../components/PublicIcon";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { shareMeta } from "@/lib/seo";
 import { SchemaComponent } from "@/lib/schema-component";
 import { breadcrumbSchema } from "@/lib/schemas";
@@ -8,24 +10,17 @@ import { SiteFooter } from "../components/SiteFooter";
 import { JoinCta } from "../components/JoinCta";
 import { PageHero } from "../components/PageHero";
 import { Carousel } from "../components/Carousel";
+import { ScrollReveal } from "../components/ScrollReveal";
 import { ABOUT_INTRO, ABOUT_STORY, STAFF, VALUES } from "@/lib/content";
 import { BUSINESS_AREA, OPENING_HOURS_SCHEMA, SITE_BASE_URL, SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: `About ${SITE_NAME} | Our story & staff | ${BUSINESS_AREA}`,
   description: `Meet the team at ${SITE_NAME} in ${BUSINESS_AREA}. ${ABOUT_INTRO}`,
-  ...shareMeta({
-    title: `About ${SITE_NAME}`,
-    description: ABOUT_INTRO,
-    path: "/about",
-  }),
+  ...shareMeta({ title: `About ${SITE_NAME}`, description: ABOUT_INTRO, path: "/about" }),
   alternates: { canonical: `${SITE_BASE_URL}/about` },
 };
-
-const daysOpen = OPENING_HOURS_SCHEMA.reduce(
-  (n, h) => n + (Array.isArray(h.dayOfWeek) ? h.dayOfWeek.length : 1),
-  0,
-);
+const daysOpen = OPENING_HOURS_SCHEMA.reduce((n, h) => n + (Array.isArray(h.dayOfWeek) ? h.dayOfWeek.length : 1), 0);
 const hoursPerDay = (() => {
   const h = OPENING_HOURS_SCHEMA[0];
   const [oh, om] = h.opens.split(":").map(Number);
@@ -33,135 +28,58 @@ const hoursPerDay = (() => {
   return Math.round((ch * 60 + cm - (oh * 60 + om)) / 60);
 })();
 
-const dots = {
-  backgroundImage: "radial-gradient(rgba(14,14,14,0.09) 1px, transparent 1px)",
-  backgroundSize: "18px 18px",
-};
-
 export default function AboutPage() {
   return (
     <div className="v2 min-h-screen">
       <SmoothScroll />
       <SiteNav />
-
       <main>
-        <PageHero
-          eyebrow={`About ${SITE_NAME}`}
-          title={
-            <>
-              Built around
-              <br />
-              showing up
-            </>
-          }
-          intro={ABOUT_INTRO}
-        />
+        <PageHero eyebrow={`About ${SITE_NAME}`} title={<>Built around<br />showing up.</>} intro={ABOUT_INTRO} image="/images/story.jpg" />
+        <section className="frame grid grid-cols-2 gap-y-8 px-5 pb-14 text-center md:grid-cols-4 md:px-10 md:pb-20">
+          {[
+            { value: String(daysOpen), label: "Days a week" },
+            { value: String(hoursPerDay), label: "Hours a day" },
+            { value: OPENING_HOURS_SCHEMA[0].opens, label: "Doors open" },
+            { value: OPENING_HOURS_SCHEMA[0].closes, label: "Doors close" },
+          ].map((s, i) => <div key={s.label} className={i % 2 === 1 ? "border-l border-night/10 px-3" : "px-3 md:border-l md:border-night/10 md:first:border-l-0"}><p className="text-4xl font-semibold tracking-tight md:text-5xl">{s.value}</p><p className="mt-2 text-sm text-night/55">{s.label}</p></div>)}
+        </section>
 
-        {/* Story */}
-        <section style={dots}>
-          <div className="frame grid gap-8 px-5 py-24 md:grid-cols-12 md:px-10 md:py-32">
-            <p className="mono text-lime-deep md:col-span-4">Our story</p>
-            <div className="space-y-6 md:col-span-8">
-              {ABOUT_STORY.map((p, i) => (
-                <p key={p} className="text-2xl leading-[1.35] font-light tracking-tight md:text-[2rem] md:leading-[1.3]">
-                  {i === 0 && <span className="inline-block w-10 md:w-24" aria-hidden />}
-                  {p}
-                </p>
-              ))}
-            </div>
+        <section className="bg-cloud">
+          <div className="frame grid items-center gap-10 px-5 py-20 md:px-10 md:py-24 lg:grid-cols-12 lg:gap-16">
+            <ScrollReveal className="lg:col-span-5">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/images/facility-4.jpg" alt="The training floor at Liger Gym" className="aspect-[4/5] w-full rounded-[2rem] object-cover" loading="lazy" />
+            </ScrollReveal>
+            <ScrollReveal className="lg:col-span-7" delay={100}><p className="eyebrow eyebrow-dark">Our story</p><h2 className="section-title mt-5">Driven by purpose.<br />Built for your progress.</h2><div className="mt-7 space-y-5">{ABOUT_STORY.map((p) => <p key={p} className="section-copy">{p}</p>)}</div></ScrollReveal>
           </div>
         </section>
 
-        {/* Facts */}
-        <section className="bg-lime text-night">
-          <div className="frame grid grid-cols-2 px-5 md:grid-cols-4 md:px-10">
-            {[
-              { value: String(daysOpen), label: "Days a week" },
-              { value: String(hoursPerDay), label: "Hours a day" },
-              { value: OPENING_HOURS_SCHEMA[0].opens, label: "Doors open" },
-              { value: OPENING_HOURS_SCHEMA[0].closes, label: "Doors close" },
-            ].map((s, i) => (
-              <div
-                key={s.label}
-                className={`py-12 md:py-16 ${i % 2 === 1 ? "border-l border-night/15 pl-5" : ""} ${
-                  i > 1 ? "border-t border-night/15 md:border-t-0" : ""
-                } ${i > 0 ? "md:border-l md:pl-8" : ""}`}
-              >
-                <p className="text-5xl font-light tracking-tight md:text-6xl">{s.value}</p>
-                <p className="mono mt-3 text-night/65">{s.label}</p>
-              </div>
-            ))}
-          </div>
+        <section className="frame px-5 py-20 md:px-10 md:py-24">
+          <ScrollReveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="eyebrow eyebrow-dark">What we offer</p><h2 className="section-title mt-4">Find what moves you.</h2></div><p className="section-copy max-w-sm">Everything you need to train, under one roof. Pick what suits you, or mix and match.</p></ScrollReveal>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">{[
+            { title: "Strength training", detail: "Free weights, racks and machines for every level", img: "/images/facility-3.jpg" },
+            { title: "Cardio", detail: "Treadmills, bikes and conditioning, every day", img: "/images/facility-1.jpg" },
+            { title: "Group classes", detail: "Coached sessions through the week", img: "/images/facility-2.jpg" },
+          ].map((item, i) => <ScrollReveal key={item.title} delay={i * 90}><Link href="/services" className="service-card">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={item.img} alt={`${item.title} at Liger Gym`} loading="lazy" />
+            <div className="service-card-body"><div className="flex items-center justify-between gap-3"><h3>{item.title}</h3><span className="round-arrow" aria-hidden="true">↗</span></div><p>{item.detail}</p></div>
+          </Link></ScrollReveal>)}</div>
         </section>
 
-        {/* Values */}
-        <section className="frame px-5 py-24 md:px-10 md:py-32">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="mono text-lime-deep">What we stand for</p>
-            <h2 className="mt-4 text-4xl leading-[1.1] font-light tracking-tight md:text-5xl">
-              Three things we never skip
-            </h2>
-          </div>
-          <ol className="mt-14 grid gap-3 md:grid-cols-3">
-            {VALUES.map((v, i) => (
-              <li key={v.title} className="flex flex-col rounded-[1.25rem] bg-cloud p-7 md:min-h-64">
-                <div className="flex items-center justify-between">
-                  <span className="mono text-night/40">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="material-symbols-outlined text-lime-deep">{v.icon}</span>
-                </div>
-                <h3 className="mt-auto pt-12 text-2xl font-light tracking-tight">{v.title}</h3>
-                <p className="mono mt-3 text-night/55">{v.body}</p>
-              </li>
-            ))}
-          </ol>
+        <section className="bg-night py-20 text-white md:py-24">
+          <ScrollReveal className="frame px-5 md:px-10"><div className="mx-auto max-w-2xl text-center"><p className="eyebrow">Our people</p><h2 className="section-title mt-4">The people behind<br />the progress.</h2><p className="mt-5 text-white/60">On the floor every day to help you train well and keep coming back.</p></div></ScrollReveal>
+          <ScrollReveal delay={100} className="frame mt-12"><Carousel tone="dark">{STAFF.map((person, i) => <figure key={`${person.name}-${i}`} data-card className="w-[70vw] max-w-[18rem] shrink-0 sm:w-[17rem]"><div className="overflow-hidden rounded-[1.5rem] bg-night-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={person.photo} alt={person.name} className="aspect-[4/5] w-full object-cover" loading="lazy" />
+          </div><figcaption className="mt-5 text-center"><p className="text-lg font-semibold">{person.name}</p><p className="mt-1 text-sm text-white/60">{person.role}</p></figcaption></figure>)}</Carousel></ScrollReveal>
         </section>
 
-        {/* Staff */}
-        <section className="bg-night-2 py-24 text-white md:py-32">
-          <div className="frame px-5 md:px-10">
-            <div className="mx-auto max-w-2xl text-center">
-              <p className="mono text-lime">Our staff</p>
-              <h2 className="mt-4 text-4xl leading-[1.1] font-light tracking-tight md:text-5xl">
-                The people behind the progress
-              </h2>
-              <p className="mono mx-auto mt-5 max-w-md text-white/50">
-                On the floor every day to help you train well and keep coming back.
-              </p>
-            </div>
-          </div>
-          <div className="frame mt-14">
-            <Carousel tone="dark">
-              {STAFF.map((person, i) => (
-                <figure
-                  key={`${person.name}-${i}`}
-                  data-card
-                  className="w-[70vw] max-w-[18rem] shrink-0 sm:w-[17rem]"
-                >
-                  <div className="overflow-hidden rounded-[1.25rem] bg-night">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={person.photo} alt={person.name} className="photo aspect-[4/5] w-full object-cover" />
-                  </div>
-                  <figcaption className="mt-4 text-center">
-                    <p className="text-lg font-light">{person.name}</p>
-                    <p className="mono mt-1 text-white/45">{person.role}</p>
-                  </figcaption>
-                </figure>
-              ))}
-            </Carousel>
-          </div>
-        </section>
-
+        <section className="frame px-5 py-20 md:px-10 md:py-24"><ScrollReveal><p className="eyebrow eyebrow-dark">What we believe</p><h2 className="section-title mt-4">The basics, done with care.</h2></ScrollReveal><div className="mt-12 grid gap-8 md:grid-cols-3">{VALUES.map((value) => <ScrollReveal key={value.title} className="border-t border-night/10 pt-7"><span className="value-icon"><PublicIcon name={value.icon} /></span><h3 className="mt-5 text-xl font-semibold">{value.title}</h3><p className="section-copy mt-3">{value.body}</p></ScrollReveal>)}</div></section>
         <JoinCta />
       </main>
-
       <SiteFooter />
-
-      <SchemaComponent
-        schema={breadcrumbSchema([
-          { name: "Home", url: SITE_BASE_URL },
-          { name: "About", url: `${SITE_BASE_URL}/about` },
-        ])}
-      />
+      <SchemaComponent schema={breadcrumbSchema([{ name: "Home", url: SITE_BASE_URL }, { name: "About", url: `${SITE_BASE_URL}/about` }])} />
     </div>
   );
 }

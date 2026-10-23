@@ -70,6 +70,8 @@ export const localBusinessSchema = () => ({
     closes: h.closes,
   })),
   currenciesAccepted: CURRENCY,
+  paymentAccepted: "Cash, Bank Transfer",
+  priceRange: "$$",
   sameAs: SOCIAL_LINKS.map((s) => s.href),
 });
 

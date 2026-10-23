@@ -1,5 +1,6 @@
 "use client";
 
+import { PublicIcon } from "../components/PublicIcon";
 import { Suspense, useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { potentialCustomersApi } from "@/lib/api";
@@ -114,14 +115,14 @@ function RegisterContent() {
       <SmoothScroll />
       <SiteNav />
 
-      <main className="p-2 pt-24 md:p-3 md:pt-28" style={{ background: "var(--color-mist)" }}>
-        <div className="grid gap-2 md:gap-3 lg:grid-cols-12">
+      <main className="registration-main">
+        <div className="registration-grid grid lg:grid-cols-12">
           {/* What happens next */}
-          <aside className="relative overflow-hidden rounded-[1.25rem] bg-lime text-night md:rounded-[1.5rem] lg:col-span-5">
+          <aside className="registration-aside relative overflow-hidden rounded-[1.25rem] text-night md:rounded-[1.5rem] lg:col-span-5">
             <div aria-hidden className="absolute -top-20 -right-20 hidden h-64 w-64 rounded-full border-[28px] border-night/8 lg:block" />
             <div className="relative flex h-full flex-col p-5 md:p-8 lg:p-10">
               <p className="mono text-night/65">Join {SITE_NAME}</p>
-              <h1 className="mt-3 text-[1.85rem] leading-[1.08] font-light tracking-[-0.03em] lg:mt-5 lg:text-6xl">
+              <h1 className="mt-3 text-[1.85rem] leading-[1.08] font-semibold tracking-[-0.03em] lg:mt-5 lg:text-6xl">
                 Let’s get you <br className="hidden lg:block" />
                 started
               </h1>
@@ -140,7 +141,7 @@ function RegisterContent() {
                   <li key={step.t} className="flex items-baseline gap-5 border-b border-night/15 py-5">
                     <span className="mono text-night/50">{String(i + 1).padStart(2, "0")}</span>
                     <div>
-                      <p className="text-xl font-light">{step.t}</p>
+                      <p className="text-xl font-semibold">{step.t}</p>
                       <p className="mono mt-1 text-night/60">{step.d}</p>
                     </div>
                   </li>
@@ -150,8 +151,8 @@ function RegisterContent() {
               {selected && (
                 <div className="mt-4 rounded-[1rem] bg-night p-4 text-white lg:mt-6 lg:p-5">
                   <p className="mono text-white/50">Your plan</p>
-                  <p className="mt-2 text-lg font-light">{selected.name}</p>
-                  <p className="mt-1 text-3xl font-light text-lime">{formatPrice(selected.price, CURRENCY)}</p>
+                  <p className="mt-2 text-lg font-semibold">{selected.name}</p>
+                  <p className="mt-1 text-3xl font-semibold text-lime">{formatPrice(selected.price, CURRENCY)}</p>
                   <p className="mono mt-1 text-white/50">for {formatPeriod(selected.periodDays)}</p>
                 </div>
               )}
@@ -159,7 +160,7 @@ function RegisterContent() {
           </aside>
 
           {/* Form */}
-          <section className="rounded-[1.25rem] bg-cloud p-6 md:rounded-[1.5rem] md:p-10 lg:col-span-7">
+          <section className="registration-form rounded-[1.25rem] p-6 md:rounded-[1.5rem] md:p-10 lg:col-span-7">
             <p className="mono text-lime-deep">Your details</p>
             <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
               <div className="grid gap-5 md:grid-cols-2">
@@ -235,9 +236,7 @@ function RegisterContent() {
                   <span className="mono text-night/70">
                     More about you <span className="text-night/35">(optional)</span>
                   </span>
-                  <span className="material-symbols-outlined text-[20px] transition-transform group-open:rotate-180">
-                    expand_more
-                  </span>
+                  <PublicIcon name="expand_more" className="transition-transform group-open:rotate-180" />
                 </summary>
                 <div className="grid gap-5 border-t border-night/12 p-4 md:grid-cols-2">
                   <label className="block">
@@ -297,10 +296,10 @@ function RegisterContent() {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-night/70 p-4 backdrop-blur-sm" role="dialog" aria-modal="true">
           <div className="w-full max-w-md rounded-[1.5rem] bg-white p-8 text-center text-night shadow-2xl">
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-lime">
-              <span className="material-symbols-outlined text-3xl">check</span>
+              <PublicIcon name="check" />
             </div>
             <p className="mono mt-6 text-lime-deep">Registered</p>
-            <h2 className="mt-2 text-3xl font-light tracking-tight">You’re on the list</h2>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight">You’re on the list</h2>
             <p className="mono mt-3 text-night/55">We’ll call you soon. Welcome to {SITE_NAME}.</p>
             <button type="button" onClick={() => router.push("/")} className="cta cta-lg cta-dark mt-8 w-full justify-center">
               Back to home
@@ -321,12 +320,3 @@ export default function RegisterPage() {
     </Suspense>
   );
 }
-
-
-
-
-
-
-
-
-

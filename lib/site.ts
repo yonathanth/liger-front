@@ -7,8 +7,8 @@
 export const SITE_NAME = "Liger Gym";
 /** Short form for tight spots (nav on small screens, PWA name). */
 export const SITE_SHORT_NAME = "Liger";
-// TODO: domain not decided yet.
-export const SITE_BASE_URL = "https://ligergym.com";
+export const SITE_BASE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://ligergymadddis.com";
 
 export const SITE_TAGLINE = "Train like a hybrid. Built for strength, made for everyone.";
 export const SITE_DESCRIPTION =
@@ -36,12 +36,11 @@ export const SOCIAL_LINKS: ReadonlyArray<{ label: string; href: string; icon: st
   { label: "TikTok", href: "https://www.tiktok.com/@liger.gym", icon: "music_note" },
 ];
 
-// TODO: hours are from Google Maps; confirm with the gym.
 /** Rows as shown on the site, in order. */
 export const OPENING_HOURS: ReadonlyArray<{ days: string; hours: string }> = [
-  { days: "Every day", hours: "6:00 AM – 9:00 PM" },
+  { days: "Every day", hours: "6:00 AM to 9:00 PM" },
 ];
-export const OPENING_HOURS_SUMMARY = "Open every day, 6 AM – 9 PM";
+export const OPENING_HOURS_SUMMARY = "Open every day, 6 AM to 9 PM";
 export const CLOSING_TIME_SHORT = "9 PM";
 
 export const OPENING_HOURS_SCHEMA = [

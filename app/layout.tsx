@@ -16,7 +16,7 @@ const spaceGrotesk = Space_Grotesk({
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -35,15 +35,45 @@ export const metadata: Metadata = {
   applicationName: SITE_NAME,
   keywords: [
     SITE_NAME,
+    "Liger Gym Addis Ababa",
+    "gym in Addis Ababa",
     "gym Haile Garment",
     "gym Meskelegna",
-    "gym Addis Ababa",
-    "fitness Addis Ababa",
-    "gym membership",
+    "fitness center Addis Ababa",
+    "bodybuilding Addis Ababa",
+    "personal trainer Addis Ababa",
+    "strength training Ethiopia",
+    "gym membership prices Addis Ababa",
+    "cross training Addis Ababa",
+    "best gym in Haile Garment",
+    "ligergymadddis.com",
+    "ligergymaddis.com",
   ],
-  robots: "index, follow",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  category: "fitness",
   authors: [{ name: SITE_NAME }],
-  ...shareMeta({ title: `${SITE_NAME} | Train without limits`, description: SITE_DESCRIPTION }),
+  formatDetection: {
+    telephone: true,
+    address: true,
+    email: false,
+  },
+  other: {
+    "geo.region": "ET-AA",
+    "geo.placename": "Addis Ababa",
+    "geo.position": "8.93563;38.72272",
+    "ICBM": "8.93563, 38.72272",
+  },
+  ...shareMeta({ title: `${SITE_NAME} | Built for strength, made for everyone`, description: SITE_DESCRIPTION }),
   alternates: {
     canonical: SITE_BASE_URL,
   },

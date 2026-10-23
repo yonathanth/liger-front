@@ -1,5 +1,6 @@
 "use client";
 
+import { PublicIcon } from "./PublicIcon";
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 /**
@@ -152,7 +153,7 @@ export function Carousel({
             aria-label="Previous"
             className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors disabled:cursor-default ${arrow}`}
           >
-            <span className="material-symbols-outlined text-[22px]">chevron_left</span>
+            <PublicIcon name="chevron_left" />
           </button>
           <span className={`mono w-14 text-center ${tone === "dark" ? "text-white/50" : "text-night/50"}`}>
             {index + 1} / {count}
@@ -164,7 +165,7 @@ export function Carousel({
             aria-label="Next"
             className={`flex h-11 w-11 items-center justify-center rounded-full transition-colors disabled:cursor-default ${arrow}`}
           >
-            <span className="material-symbols-outlined text-[22px]">chevron_right</span>
+            <PublicIcon name="chevron_right" />
           </button>
         </div>
       )}

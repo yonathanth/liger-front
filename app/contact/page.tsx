@@ -42,14 +42,14 @@ export default function ContactPage() {
               className="group flex flex-col rounded-[1.25rem] bg-night p-7 text-white transition-colors hover:bg-night-3"
             >
               <p className="mono text-lime">Call us</p>
-              <p className="mt-8 text-3xl font-light tracking-tight md:text-4xl">{PHONE_DISPLAY}</p>
+              <p className="mt-8 text-3xl font-semibold tracking-tight md:text-4xl">{PHONE_DISPLAY}</p>
               <p className="mono mt-2 text-white/45">Every day, during opening hours</p>
             </a>
 
             {/* Location */}
             <div className="flex flex-col rounded-[1.25rem] bg-cloud p-7">
               <p className="mono text-lime-deep">Find us</p>
-              <p className="mt-8 text-2xl leading-snug font-light tracking-tight">
+              <p className="mt-8 text-2xl leading-snug font-semibold tracking-tight">
                 {BUSINESS_LOCATION_LINE}, {BUSINESS_CITY}
               </p>
               <a
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 {OPENING_HOURS.map((h) => (
                   <div key={h.days} className="flex items-baseline justify-between gap-4 py-2">
                     <dt className="mono text-night/55">{h.days}</dt>
-                    <dd className="text-xl font-light">{h.hours}</dd>
+                    <dd className="text-xl font-semibold">{h.hours}</dd>
                   </div>
                 ))}
               </dl>
@@ -108,7 +108,7 @@ export default function ContactPage() {
           <div className="flex flex-col items-start justify-between gap-6 rounded-[1.25rem] bg-night p-8 text-white md:flex-row md:items-center md:p-10">
             <div>
               <p className="mono text-lime">Ready to start?</p>
-              <p className="mt-3 text-3xl font-light tracking-tight">Register online and we’ll call you back.</p>
+              <p className="mt-3 text-3xl font-semibold tracking-tight">Register online and we’ll call you back.</p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Link href="/register" className="cta cta-lg">
