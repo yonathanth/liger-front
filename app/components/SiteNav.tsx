@@ -53,7 +53,7 @@ export function SiteNav() {
         <nav id="public-mobile-menu" className="mobile-nav" aria-label="Mobile">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} aria-current={isActive(item.href) ? "page" : undefined} onClick={() => setOpen(false)} className={isActive(item.href) ? "nav-link is-active" : "nav-link"}>
-              {item.label}<span aria-hidden="true">↗</span>
+              {item.label}<PublicIcon name="arrow_up_right" className="arrow-icon" />
             </Link>
           ))}
           <Link href="/register" className="cta justify-center" onClick={() => setOpen(false)}>Join Liger</Link>

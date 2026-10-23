@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PublicIcon } from "./PublicIcon";
 import {
   BUSINESS_CITY,
   BUSINESS_LOCATION_LINE,
@@ -85,7 +86,7 @@ export function SiteFooter() {
             © {year} {SITE_NAME}
           </p>
           <Link href="/admin/login" className="hover:text-white">
-            Staff login ↗
+            Staff login <PublicIcon name="arrow_up_right" className="arrow-icon" />
           </Link>
         </div>
       </div>

@@ -126,7 +126,7 @@ export default async function Home() {
                   <Link href="/services" className="service-card !bg-white">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={galleryImages[i]} alt={`${item.title} at Liger Gym`} loading="lazy" />
-                    <div className="service-card-body"><div className="flex items-center justify-between gap-3"><h3>{item.title}</h3><span className="round-arrow" aria-hidden="true">↗</span></div><p>{item.detail}</p></div>
+                    <div className="service-card-body"><div className="flex items-center justify-between gap-3"><h3>{item.title}</h3><span className="round-arrow" aria-hidden="true"><PublicIcon name="arrow_up_right" className="arrow-icon" /></span></div><p>{item.detail}</p></div>
                   </Link>
                 </ScrollReveal>
               ))}
@@ -172,7 +172,7 @@ export default async function Home() {
         <section className="py-20 md:py-28">
           <ScrollReveal className="frame px-5 text-center md:px-10"><p className="eyebrow eyebrow-dark">Your next chapter starts here</p><h2 className="section-title mt-4">Simple plans. Steady progress.</h2><p className="section-copy mx-auto mt-5 max-w-lg">Pick a plan, register online, and pay at the front desk. We’ll help you find the right fit.</p></ScrollReveal>
           {plansByPrice.length > 0 ? <ScrollReveal delay={100} className="mt-12"><PlanCarousel plans={plansByPrice} /></ScrollReveal> : <div className="frame mt-10 px-5 text-center md:px-10"><p className="section-copy">Call us for current membership options.</p><a href={`tel:${PHONE_E164}`} className="cta cta-dark mt-5">{PHONE_DISPLAY}</a></div>}
-          <div className="mt-8 text-center"><Link href="/services" className="text-sm font-medium text-lime-deep underline-offset-4 hover:underline">Explore all memberships ↗</Link></div>
+          <div className="mt-8 text-center"><Link href="/services" className="text-sm font-medium text-lime-deep underline-offset-4 hover:underline">Explore all memberships <PublicIcon name="arrow_up_right" className="arrow-icon" /></Link></div>
         </section>
 
         <section className="bg-cloud">

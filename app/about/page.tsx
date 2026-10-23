@@ -63,7 +63,7 @@ export default function AboutPage() {
           ].map((item, i) => <ScrollReveal key={item.title} delay={i * 90}><Link href="/services" className="service-card">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={item.img} alt={`${item.title} at Liger Gym`} loading="lazy" />
-            <div className="service-card-body"><div className="flex items-center justify-between gap-3"><h3>{item.title}</h3><span className="round-arrow" aria-hidden="true">↗</span></div><p>{item.detail}</p></div>
+            <div className="service-card-body"><div className="flex items-center justify-between gap-3"><h3>{item.title}</h3><span className="round-arrow" aria-hidden="true"><PublicIcon name="arrow_up_right" className="arrow-icon" /></span></div><p>{item.detail}</p></div>
           </Link></ScrollReveal>)}</div>
         </section>
 

@@ -554,25 +554,22 @@ html.lenis body {
   transition: background .2s, transform .2s, box-shadow .2s;
 }
 .v2 .cta::after {
-  content: "↗";
-  display: grid;
-  place-items: center;
+  /* SVG arrow, not the ↗ character: Android draws that as a colour emoji */
+  content: "";
   width: 1.9rem;
   height: 1.9rem;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #0a0a0a;
-  color: #cae818;
-  font-size: 1rem;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23cae818' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E") center / 1rem no-repeat, #0a0a0a;
 }
 .v2 .cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px #00000012; }
 .v2 .cta-lg { min-height: 3.5rem; padding: .65rem .75rem .65rem 1.6rem; font-size: .95rem; }
 .v2 .cta-lg::after { width: 2.2rem; height: 2.2rem; }
 .v2 .cta-white { background: #fff; color: #0a0a0a; }
 .v2 .cta-white:hover { background: #f4fadc; }
-.v2 .cta-dark::after { background: #ffffff1f; color: #cae818; }
+.v2 .cta-dark::after { background-color: #ffffff1f; }
 .v2 .cta-ghost { background: #ffffff08; border: 1px solid #ffffff45; color: white; }
-.v2 .cta-ghost::after { background: #ffffff14; color: white; }
+.v2 .cta-ghost::after { background-color: #ffffff14; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M8 7h9v9'/%3E%3C/svg%3E"); }
 .v2 .eyebrow {
   display: inline-flex;
   align-items: center;
@@ -606,6 +603,8 @@ html.lenis body {
 .v2 .service-card-body { padding: 1.25rem .9rem 1rem; }
 .v2 .service-card h3 { font-size: 1.4rem; font-weight: 600; letter-spacing: -.035em; }
 .v2 .service-card p { font-size: .9rem; color: #656565; margin-top: .4rem; }
+.arrow-icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.125em; }
+.v2 .round-arrow .arrow-icon { width: 1.1rem; height: 1.1rem; }
 .v2 .round-arrow { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: #0a0a0a; color: #cae818; flex-shrink: 0; }
 .v2 .value-card { border-radius: 1.5rem; border: 1px solid #ffffff1c; padding: 2rem; background: #ffffff05; }
 .v2 .value-icon { display: inline-grid; place-items: center; width: 3rem; height: 3rem; border-radius: 1rem; color: #cae818; background: #cae81814; }
