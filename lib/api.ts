@@ -1,6 +1,6 @@
 // API Client with typed responses for Gym API
-// TODO: domain not decided yet. Set NEXT_PUBLIC_API_URL at build time.
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'https://api.ligergym.com').replace(/\/+$/, '');
+// Set NEXT_PUBLIC_API_URL at build time, or default to production domain.
+export const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'https://api.ligergymaddis.com').replace(/\/+$/, '');
 
 // Types based on gym-api DTOs
 export interface AdminProfile {
